@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
@@ -18,27 +19,9 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 |
 */
 
-Route::get('/', function () {
-    // Show all Posts that have been published
-    return view('posts', [
-        'posts' => Post::latest()->with('category', 'author')->get()
-    ]);
-});
+// Frontend Routes
+    Route::get('/', [PostController::class, 'index'])->name('home');
+    Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
-Route::get('posts/{post:slug}', function (Post $post) {
-    // Find a Post by its slug, then pass it to a view called "post"
-    return view('post', compact('post'));
-});
 
-Route::get('categories/{category:slug}',function(Category $category){
-    return view('posts', [
-        'posts' => $category->posts->load(['category','author'])
-    ]);
-});
-
-Route::get('authors/{author:username}',function(User $author){
-    return view('posts', [
-        'posts' => $author->posts->load(['category','author'])
-    ]);
-});
-
+// Backend Routes
