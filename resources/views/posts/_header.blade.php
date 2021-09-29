@@ -5,7 +5,7 @@
 
     <div class="space-y-2 lg:space-y-0 lg:space-x-4 mt-4">
         <!--  Category -->
-        <x-category-dropdown />
+        <x-categories-dropdown />
 
         <!-- Other Filters -->
         {{-- <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl border border-black border-opacity-10">
@@ -32,6 +32,9 @@
         <!-- Search -->
         <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl px-3 py-2 border border-black border-opacity-10">
             <form method="GET" action="">
+                @if (request('category'))
+                    <input type="hidden" name="category" value="{{ request('category') }}">
+                @endif
                 <input type="text"
                         name="search"
                         placeholder="Find something"

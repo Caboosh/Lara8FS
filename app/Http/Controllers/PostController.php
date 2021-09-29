@@ -13,7 +13,7 @@ class PostController extends Controller
     {
     // Search for posts that match the user's query, if applicable and show Resulting Posts
         return view('posts.index', [
-            'posts' => Post::latest()->filter(request(['search', 'category', 'author']))->get()
+            'posts' => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(9)->withQueryString()
         ]);
     }
 
