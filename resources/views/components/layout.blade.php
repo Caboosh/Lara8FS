@@ -56,5 +56,10 @@
                 </div>
             </div>
         </footer>
+        @if (session()->has('success'))
+            <x-flash type="error">
+                {{ session('success') }}
+            </x-flash>
+        @endif
     </section>
 </body>

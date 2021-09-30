@@ -22,6 +22,8 @@ class RegisterController extends Controller
         ]);
         User::create($userdata);
 
+        session()->flash('success', 'Your Account has been successfly created.');
+
         return redirect('/');
     }
 }
