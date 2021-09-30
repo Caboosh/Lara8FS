@@ -12,3 +12,4 @@ use Illuminate\Support\Facades\Route;
 
 // Backend Routes
     Route::get('/register',[RegisterController::class, 'create']);
+    Route::post('/register',[RegisterController::class, 'store']);
