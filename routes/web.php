@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SessionsController;
 
 
 // Frontend Routes
@@ -10,6 +11,9 @@ use Illuminate\Support\Facades\Route;
     Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
 
-// Backend Routes
-    Route::get('/register',[RegisterController::class, 'create']);
-    Route::post('/register',[RegisterController::class, 'store']);
+// Session Routes
+    Route::get('/register',[RegisterController::class, 'create'])->middleware('guest');
+    Route::post('/register',[RegisterController::class, 'store'])->middleware('guest');
+
+    Route::get('/login', [SessionsController::class, 'create']);
+    Route::post('/logout', [SessionsController::class, 'destroy']);

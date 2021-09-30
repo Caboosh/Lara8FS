@@ -19,11 +19,19 @@
             </div>
 
             <div class="mt-8 md:mt-0">
-                <a href="/" class="text-xs font-bold uppercase">Home Page</a>
-
-                <a href="#" class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
+                <a href="#" class="bg-blue-500 mr-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
                     Subscribe for Updates
                 </a>
+                @auth
+                    <span class="text-xs font-bold uppercase">{{ Auth::user()->name }}</span> | <form class="inline-flex" action="/logout" method="post"> @csrf
+                            <button type="submit" class="bg-gray-400 rounded-lg text-xs font-semibold text-white uppercase p-2 hover:bg-gray-500"> Logout </button>
+                    </form>
+                @endauth
+
+                @guest
+                    <a href="/register" class="bg-gray-400 hover:bg-gray-500 rounded-lg text-xs font-semibold text-white uppercase p-2">Register</a> |
+                    <a href="/Login" class="bg-gray-400 hover:bg-gray-500 rounded-lg text-xs font-semibold text-white uppercase p-2">Login</a>
+                @endguest
             </div>
         </nav>
 

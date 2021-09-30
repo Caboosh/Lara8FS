@@ -20,10 +20,11 @@ class RegisterController extends Controller
             'email'         => 'required|email|max:255|unique:users,email',
             'password'      => 'required|min:8|max:255',
         ]);
-        User::create($userdata);
 
-        session()->flash('success', 'Your Account has been successfly created.');
+        $user = User::create($userdata);
 
-        return redirect('/');
+        auth()->login($user);
+
+        return redirect('/')->with('success', 'Your Account has been successfly created.');
     }
 }
