@@ -57,7 +57,7 @@
             </div>
         </footer>
         @if (session()->has('success'))
-            <x-flash type="error">
+            <x-flash>
                 {{ session('success') }}
             </x-flash>
         @endif
