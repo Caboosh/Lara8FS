@@ -30,7 +30,7 @@
 
                 @guest
                     <a href="/register" class="bg-gray-400 hover:bg-gray-500 rounded-lg text-xs font-semibold text-white uppercase p-2">Register</a> |
-                    <a href="/Login" class="bg-gray-400 hover:bg-gray-500 rounded-lg text-xs font-semibold text-white uppercase p-2">Login</a>
+                    <a href="/login" class="bg-gray-400 hover:bg-gray-500 rounded-lg text-xs font-semibold text-white uppercase p-2">Login</a>
                 @endguest
             </div>
         </nav>
