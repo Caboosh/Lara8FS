@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\NewsletterController;
+use MailchimpMarketing\ApiClient;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
+use App\Services\Newsletter;
+use Illuminate\Validation\ValidationException;
 
 
 // Frontend Routes
@@ -19,3 +23,6 @@ use App\Http\Controllers\SessionsController;
     Route::post('/sessions', [SessionsController::class, 'store'])->middleware('guest');
 
     Route::post('/logout', [SessionsController::class, 'destroy'])->middleware('auth');
+
+// Newsletter routes
+    Route::post('/newsletter', NewsletterController::class);
