@@ -2,24 +2,7 @@
 
 namespace App\Services;
 
-use MailchimpMarketing\ApiClient;
-
-class Newsletter {
-
-// Construct the Dependencies for a Newsletter
-public function __construct (protected ApiClient $client) {
-
-}
-
-// Subscribe a user to a Newsletter
-   public function subscribe (string $email, string $list = null)
-   {
-        $list ??= config('services.mailchimp.lists.subscribers');
-
-        return $this->client->lists->addListMember($list,[
-            'email_address' => $email,
-            'status'        => 'subscribed'
-        ]);
-    }
-
+interface Newsletter
+{
+    public function subscribe (string $email, string $list = null);
 }
