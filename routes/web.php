@@ -10,6 +10,8 @@ use App\Http\Controllers\NewsletterController;
     Route::get('/', [PostController::class, 'index'])->name('home');
     Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
+// Backend (Admin) Routes
+    Route::get('/admin/posts/create', [PostController::class, 'create'])->middleware('admin');
 
 // Session Routes
     Route::get('/register',[RegisterController::class, 'create'])->middleware('guest');

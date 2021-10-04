@@ -3,10 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use App\Models\User;
-use App\Models\Category;
-use Illuminate\Http\Request;
-
 class PostController extends Controller
 {
     public function index()
@@ -21,5 +17,10 @@ class PostController extends Controller
     {
     // Find a Post by its slug, pass the data and show it in a view called "post"
         return view('posts.show', compact('post'));
+    }
+
+    public function create ()
+    {
+        return view('posts.create');
     }
 }

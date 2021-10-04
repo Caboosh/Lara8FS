@@ -2,8 +2,8 @@
     'type' => 'success',
     'colours' => [
         'success'   => 'bg-blue-500 text-white',
-        'warning'   => 'bg-yellow-500 text-black',
-        'error'     => 'bg-red-500 text-black'
+        'warning'   => 'bg-yellow-600 text-black',
+        'error'     => 'bg-red-600 text-white'
     ]
 ])
 

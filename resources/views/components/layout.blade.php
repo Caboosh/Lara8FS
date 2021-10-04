@@ -77,10 +77,12 @@
                 </div>
             </div>
         </footer>
-        @if (session()->has('success'))
-            <x-flash>
-                {{ session('success') }}
-            </x-flash>
-        @endif
+        @foreach (['error', 'warning', 'success'] as $status)
+            @if(Session::has($status))
+                <x-flash type="{{ $status }}">
+                    {{ Session::get($status) }}
+                </x-flash>
+            @endif
+        @endforeach
     </section>
 </body>
