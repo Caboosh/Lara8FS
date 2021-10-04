@@ -27,10 +27,10 @@ class SessionsController extends Controller
                 'password'=> 'Your Password Provided is invalid'
             ]);
         }
+        // Otherwise, if Auth Succeeds...
+            session()->regenerate();
 
-        session()->regenerate();
-
-        return redirect('/')->with('success', 'Welcome Back!');
+            return redirect('/')->with('success', 'Welcome Back!');
     }
 
     public function destroy ()
