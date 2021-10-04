@@ -9,7 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
 class MustBeAdministrator
 {
     /**
-     * Handle an incoming request.
+     * Check whether the current authenticated user are an
+     * Administrator or not, then Handle the request as needed.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
