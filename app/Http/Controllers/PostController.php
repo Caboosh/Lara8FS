@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Validation\Rule;
+
 class PostController extends Controller
 {
     public function index()
@@ -23,5 +25,26 @@ class PostController extends Controller
     {
     // Show a Form to create a post, if you are an Administrator
         return view('posts.create');
+    }
+
+    public function store ()
+    {
+    //  Validate Submitted Data from the Post Creation Form and store into the Database
+        $postdata = request()->validate([
+            'title' => 'required',
+            'slug' => ['required', Rule::unique('posts', 'slug')],
+            'excerpt' => 'required',
+            'thumbnail' => 'required|image',
+            'body' => 'required',
+            'category_id' => ['required', Rule::exists('categories', 'id')],
+        ]);
+
+        $postdata['user_id'] = auth()->id();
+        $postdata['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
+
+        Post::create($postdata);
+
+        return redirect('/')->with('success','Post Successfully Created!');
+
     }
 }

@@ -24,14 +24,26 @@
                 </a>
             </div>
 
-            <div class="mt-8 md:mt-0">
+            <div class="flex items-center mt-8 md:mt-0">
                 <a href="#newsletter" class="px-5 py-3 mr-3 text-xs font-semibold text-white uppercase bg-blue-500 rounded-full">
                     Subscribe for Updates
                 </a>
                 @auth
-                    <span class="text-xs font-bold uppercase">{{ Auth::user()->name }}</span> | <form class="inline-flex" action="/logout" method="post"> @csrf
-                            <button type="submit" class="p-2 text-xs font-semibold text-white uppercase bg-gray-400 rounded-lg hover:bg-gray-500"> Logout </button>
-                    </form>
+                    <x-dropdown class="inline-flex text-xs font-semibold text-black uppercase bg-gray-200 rounded-lg">
+                        <x-slot name="trigger">
+                            <button class="flex w-full py-2 pl-3 pr-6 text-xs font-semibold uppercase lg:inline-flex lg:w-40">
+                                {{ Auth::user()->name }} <x-icon name="down-arrow" class="absolute pointer-events-none" style="right: 6px; bottom: 5px;" />
+                            </button>
+                        </x-slot>
+                        <x-dropdown-list class="mt-9">
+                            <x-dropdown-item href="/admin/dashboard" :active="request()->is('/admin/dashboard')">Dashboard</x-dropdown-item>
+                            <x-dropdown-item href="/admin/posts/create" :active="request()->is('/admin/posts/create')">New Post</x-dropdown-item>
+                            <x-dropdown-item href="#" x-data="{}" @click.prevent="document.querySelector('#logout-form').submit()">Logout</x-dropdown-item>
+                            <form id="logout-form" class="hidden" action="/logout" method="post">
+                                @csrf
+                            </form>
+                        </x-dropdown-list>
+                    </x-dropdown>
                 @endauth
 
                 @guest
@@ -77,6 +89,7 @@
                 </div>
             </div>
         </footer>
+
         @foreach (['error', 'warning', 'success'] as $status)
             @if(Session::has($status))
                 <x-flash type="{{ $status }}">
@@ -84,5 +97,6 @@
                 </x-flash>
             @endif
         @endforeach
+
     </section>
 </body>

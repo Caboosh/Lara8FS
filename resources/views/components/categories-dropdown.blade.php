@@ -1,15 +1,15 @@
 
-<div class="relative lg:inline-flex bg-gray-100 rounded-xl border border-black border-opacity-10">
+<div class="relative bg-gray-100 border border-black lg:inline-flex rounded-xl border-opacity-10">
     <x-dropdown>
         <x-slot name="trigger">
-            <button class="py-2 pl-3 pr-9 text-sm lg:w-40 w-full font-semibold flex lg:inline-flex">
+            <button class="flex w-full py-2 pl-3 text-sm font-semibold pr-9 lg:w-40 lg:inline-flex">
 
                 {{ isset($currentCategory) ? ucwords($currentCategory->name) : 'Categories' }}
 
                 <x-icon name="down-arrow" class="absolute pointer-events-none" style="right: 12px" />
             </button>
         </x-slot>
-
+        <x-dropdown-list>
         <x-dropdown-item href="/?{{ http_build_query(request()->except('category', 'page')) }}" :active='request()->routeIs("home")'> All </x-dropdown-item>
 
         @foreach ($categories as $category)
@@ -17,5 +17,6 @@
                 {{ ucwords($category->name) }}
             </x-dropdown-item>
         @endforeach
+        </x-dropdown-list>
     </x-dropdown>
 </div>
