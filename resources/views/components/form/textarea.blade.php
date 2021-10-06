@@ -3,7 +3,7 @@
 <x-form.field>
     <x-form.label name="{{ $name }}" />
 
-    <textarea class="w-full p-2 border border-gray-400 rounded-md"
+    <textarea class="w-full p-2 border border-gray-300 rounded-md"
         id="{{ $name }}"
         name="{{ $name }}"
         rows="{{ $rows }}"

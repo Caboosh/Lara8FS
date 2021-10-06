@@ -24,7 +24,7 @@ class PostController extends Controller
     public function create ()
     {
     // Show a Form to create a post, if you are an Administrator
-        return view('posts.create');
+        return view('backend.posts.create');
     }
 
     public function store ()

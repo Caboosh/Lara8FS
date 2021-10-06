@@ -2,7 +2,7 @@
 
     @include('posts/_header')
 
-    <main class="max-w-7xl mx-auto mt-6 lg:mt-20 space-y-6">
+    <main class="mx-auto mt-6 space-y-6 max-w-7xl lg:mt-20">
 
         @if ($posts->count())
             <x-posts-grid :posts="$posts" />

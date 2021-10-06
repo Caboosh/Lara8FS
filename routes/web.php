@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\BackendController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\NewsletterController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\NewsletterController;
     Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
 // Backend (Admin) Routes
+    Route::get('/admin/dashboard', [BackendController::class, 'index'])->middleware('admin');
     Route::get('/admin/posts/create', [PostController::class, 'create'])->middleware('admin');
     Route::post('/admin/posts', [PostController::class, 'store'])->middleware('admin');
 
