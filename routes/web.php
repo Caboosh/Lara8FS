@@ -13,8 +13,13 @@ use App\Http\Controllers\NewsletterController;
 
 // Backend (Admin) Routes
     Route::get('/admin/dashboard', [BackendController::class, 'index'])->middleware('admin');
+
     Route::get('/admin/posts/create', [PostController::class, 'create'])->middleware('admin');
+    Route::get('/admin/posts', [BackendController::class, 'posts'])->middleware('admin');
+    Route::get('/admin/posts/{post}/edit', [BackendController::class, 'show'])->middleware('admin');
     Route::post('/admin/posts', [PostController::class, 'store'])->middleware('admin');
+
+    Route::get('/admin/users', [BackendController::class, 'users'])->middleware('admin');
 
 // Session Routes
     Route::post('/sessions', [SessionsController::class, 'store'])->middleware('guest');

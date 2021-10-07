@@ -33,7 +33,9 @@
                     </x-slot>
                     <x-dropdown-list class="mt-9">
                         <x-dropdown-item href="/admin/dashboard" class="{{ request()->is('admin/dashboard') ? 'bg-blue-400 text-white' : ''}}">Dashboard</x-dropdown-item>
-                        <x-dropdown-item href="/admin/posts/create" class="{{ request()->is('admin/posts/create') ? 'bg-blue-400 text-white' : '' }}">New Post</x-dropdown-item>
+                        <hr>
+                        <x-dropdown-item href="/admin/posts" class="{{ request()->is('admin/posts') ? 'bg-blue-400 text-white' : ''}}">All Posts</x-dropdown-item>
+                        <hr>
                         <x-dropdown-item href="#" x-data="{}" @click.prevent="document.querySelector('#logout-form').submit()">Logout</x-dropdown-item>
                         <form id="logout-form" class="hidden" action="/logout" method="post">
                             @csrf

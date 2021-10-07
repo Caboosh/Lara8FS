@@ -1,5 +1,8 @@
 <x-backend.layout>
-    <x-backend.setting heading="Create New Post">
+    <x-backend.setting heading="Posts">
+        <h4 class="mb-4 text-xl font-semibold text-left border-b border-gray-300">
+            Create New Post
+         </h4>
         <form action="/admin/posts" method="post" enctype="multipart/form-data">
             @csrf
 
