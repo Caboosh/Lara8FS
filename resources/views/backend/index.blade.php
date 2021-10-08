@@ -42,7 +42,11 @@
                             </td>
                             <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                 <a href="/admin/posts/{{$post->id}}/edit" class="px-2 py-1 text-indigo-600 transition-colors duration-300 bg-indigo-100 rounded-md hover:bg-indigo-700 hover:text-indigo-200">Edit</a> |
-                                <a href="/admin/posts/{{$post->id}}/delete" class="px-2 py-1 text-red-600 transition-colors duration-300 bg-red-100 rounded-md hover:bg-red-700 hover:text-red-200">Delete</a>
+                                <form action="/admin/posts/{{$post->id}}" method="post" class="inline-flex">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="px-2 py-1 text-red-600 transition-colors duration-300 bg-red-100 rounded-md hover:bg-red-700 hover:text-red-200">Delete</a>
+                                </form>
                             </td>
                         </tr>
 

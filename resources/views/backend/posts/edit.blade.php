@@ -4,11 +4,21 @@
             Create New Post
          </h4>
          {{-- {{dd('est')}} --}}
-         <form action="/admin/posts" method="post" enctype="multipart/form-data">
+         <form action="/admin/posts/{{ $post->id }}" method="post" enctype="multipart/form-data">
              @csrf
+             @method('PATCH')
             <x-form.input name="title" :value="old('title', $post->title)"/>
             <x-form.input name="slug" :value="old('slug', $post->slug)"/>
-            <x-form.input name="thumbnail" type="file" :value="old('thumbnail', $post->thumbnail)"/>
+            <div class="flex mt-6">
+                <div class="flex-1">
+                    <x-form.input name="thumbnail" type="file" :value="old('thumbnail', $post->thumbnail)"/>
+                </div>
+
+                <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="Blog Post illustration" class="ml-6 rounded-xl" width="160">
+            </div>
+
+
+
             <x-form.textarea name="excerpt">{{ old('excerpt', $post->excerpt) }}</x-form.textarea>
             <x-form.textarea name="body">{{old('body', $post->body)}}</x-form.textarea>
                 <x-form.field>

@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
     public function index()
     {
+        dd(Gate::allows('admin'));
     // Search for posts that match the user's query, if applicable and show Resulting Posts
-        return view('posts.index', [
-            'posts' => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(9)->withQueryString()
-        ]);
+        // return view('posts.index', [
+        //     'posts' => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(9)->withQueryString()
+        // ]);
     }
 
     public function show (Post $post)
@@ -30,21 +32,51 @@ class PostController extends Controller
     public function store ()
     {
     //  Validate Submitted Data from the Post Creation Form and store into the Database
-        $postdata = request()->validate([
-            'title' => 'required',
-            'slug' => ['required', Rule::unique('posts', 'slug')],
-            'excerpt' => 'required',
-            'thumbnail' => 'required|image',
-            'body' => 'required',
-            'category_id' => ['required', Rule::exists('categories', 'id')],
-        ]);
+
+    $postdata = $this->validatePost();
+
 
         $postdata['user_id'] = auth()->id();
-        $postdata['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
+        if (isset($postdata['thumbnail'])) {
+            $postdata['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
+        }
 
         Post::create($postdata);
 
         return redirect('/')->with('success','Post Successfully Created!');
 
+    }
+
+    public function update (Post $post)
+    {
+       $postdata = $this->validatePost($post);
+
+        if (isset($postdata['thumbnail'])) {
+            $postdata['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
+        }
+
+        $post->update($postdata);
+
+        return back()->with('success', 'Post Updated!');
+    }
+
+    public function destroy (Post $post)
+    {
+        $post->delete();
+        return back()->with('success', 'Post Deleted!');
+    }
+
+    public function validatePost (?Post $post = null):array
+    {
+        $post ??= new Post();
+       return request()->validate([
+            'title' => 'required',
+            'slug' => ['required', Rule::unique('posts', 'slug')],
+            'excerpt' => 'required',
+            'thumbnail' => $post->exists ? ['image'] : ['required', 'image'],
+            'body' => 'required',
+            'category_id' => ['required', Rule::exists('categories', 'id')],
+            'published_at' => 'required'
+        ]);
     }
 }
