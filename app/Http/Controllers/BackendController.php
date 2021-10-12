@@ -13,7 +13,7 @@ class BackendController extends Controller
     {
         // Allow Showing recently published posts on the dashboard page
         $posts = Post::latest()->paginate(6);
-        $users = User::all();
+        $users = User::latest()->paginate(6);
 
         // Show View for Backend Admin Dashboard.
         return view('backend.index',compact('posts', 'users'));

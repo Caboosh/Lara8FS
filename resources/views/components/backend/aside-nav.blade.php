@@ -15,5 +15,12 @@
         <li class="px-2 mt-2 rounded {{ request()->is('admin/users') ? 'bg-blue-400 text-white' : ''}}">
             <a href="/admin/users">All Users</a>
         </li>
+        <div class="border-b"></div>
+        <li class="px-2 mt-2 rounded {{ request()->is('admin/categories') ? 'bg-blue-400 text-white' : ''}}">
+            <a href="/admin/categories">All Categories</a>
+        </li>
+        <li class="px-2 mb-2 rounded {{ request()->is('admin/categories/create') ? 'bg-blue-400 text-white' : ''}}">
+            <a href="/admin/categories/create">New Category</a>
+        </li>
     </ul>
 </aside>

@@ -38,6 +38,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::unguard();
 
+        Gate::define('admin', function (User $user) {
+            return $user->email === 'cameron@codecameron.dev';
+        });
+
         Blade::if('isadmin', function () {
             return request()->user()?->can('admin');
         });

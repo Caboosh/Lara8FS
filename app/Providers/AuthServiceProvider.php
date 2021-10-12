@@ -28,8 +28,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('admin', function (User $user) {
-            auth()->user()?->username !== 'cabooshy';
-        });
+
     }
 }

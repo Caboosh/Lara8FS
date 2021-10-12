@@ -10,11 +10,11 @@ class PostController extends Controller
 {
     public function index()
     {
-        dd(Gate::allows('admin'));
+        // dd(Gate::allows('admin'));
     // Search for posts that match the user's query, if applicable and show Resulting Posts
-        // return view('posts.index', [
-        //     'posts' => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(9)->withQueryString()
-        // ]);
+        return view('posts.index', [
+            'posts' => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(9)->withQueryString()
+        ]);
     }
 
     public function show (Post $post)
@@ -32,9 +32,7 @@ class PostController extends Controller
     public function store ()
     {
     //  Validate Submitted Data from the Post Creation Form and store into the Database
-
-    $postdata = $this->validatePost();
-
+        $postdata = $this->validatePost();
 
         $postdata['user_id'] = auth()->id();
         if (isset($postdata['thumbnail'])) {
@@ -43,7 +41,7 @@ class PostController extends Controller
 
         Post::create($postdata);
 
-        return redirect('/')->with('success','Post Successfully Created!');
+        return back()->with('success','Post Successfully Created!');
 
     }
 
