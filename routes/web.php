@@ -14,20 +14,13 @@ use App\Http\Controllers\NewsletterController;
 
 // Backend (Admin) Routes
     Route::get('/admin/dashboard', [BackendController::class, 'index'])       ->middleware('can:admin');
-    Route::get('/admin/posts/{post}/edit', [BackendController::class, 'show'])->middleware('can:admin');
     Route::get('/admin/posts', [BackendController::class, 'posts'])           ->middleware('can:admin');
     Route::get('/admin/users', [BackendController::class, 'users'])           ->middleware('can:admin');
 
-    Route::get('/admin/posts/create', [PostController::class, 'create'])      ->middleware('can:admin');
-    Route::post('/admin/posts', [PostController::class, 'store'])             ->middleware('can:admin');
-    Route::patch('/admin/posts/{post}', [PostController::class, 'update'])    ->middleware('can:admin');
-    Route::delete('/admin/posts/{post}', [PostController::class, 'destroy'])  ->middleware('can:admin');
-
-    Route::get('/admin/categories/create', [CategoriesController::class, 'create'])        ->middleware('can:admin');
-    Route::get('/admin/categories', [CategoriesController::class, 'index'])                ->middleware('can:admin');
-    Route::post('/admin/categories', [CategoriesController::class, 'store'])               ->middleware('can:admin');
-    Route::patch('/admin/categories/{category}', [CategoriesController::class, 'update'])  ->middleware('can:admin');
-    Route::delete('/admin/categories/{category}', [CategoriesController::class, 'destroy'])->middleware('can:admin');
+    Route::middleware(['can:admin'])->group(function () {
+        Route::resource('/admin/categories', CategoriesController::class)->except('show');
+        Route::resource('/admin/posts', BackendController::class)->except('index');
+    });
 
 
 

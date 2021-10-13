@@ -17,7 +17,7 @@
                     </tr>
                     </thead>
                     @foreach ($posts as $post)
-                    <tbody class="bg-white divide-y divide-gray-200">
+                    <tbody class="text-center bg-white divide-y divide-gray-200">
                         <tr>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="text-sm text-gray-900">{{$post->title}}</div>
@@ -29,7 +29,7 @@
                             </span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="flex items-center">
+                            <div class="">
                             <div class="ml-4">
                                 <div class="text-sm font-medium text-gray-900">
                                 {{$post->author->name}}
@@ -40,7 +40,7 @@
                             </div>
                             </div>
                         </td>
-                        <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                        <td class="px-6 py-4 text-sm font-medium text-center whitespace-nowrap">
                             <a href="/admin/posts/{{$post->id}}/edit" class="px-2 py-1 text-indigo-600 transition-colors duration-300 bg-indigo-100 rounded-md hover:bg-indigo-700 hover:text-indigo-200">Edit</a> |
                             <a href="/admin/posts/{{$post->id}}/delete" class="px-2 py-1 text-red-600 transition-colors duration-300 bg-red-100 rounded-md hover:bg-red-700 hover:text-red-200">Delete</a>
                         </td>
