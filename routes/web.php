@@ -13,24 +13,23 @@ use App\Http\Controllers\NewsletterController;
     Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
 // Backend (Admin) Routes
-    Route::get('/admin/dashboard', [BackendController::class, 'index'])       ->middleware('can:admin');
-    Route::get('/admin/posts', [BackendController::class, 'posts'])           ->middleware('can:admin');
-    Route::get('/admin/users', [BackendController::class, 'users'])           ->middleware('can:admin');
-
     Route::middleware(['can:admin'])->group(function () {
+        Route::get('/admin/dashboard', [BackendController::class, 'index']);
+        Route::get('/admin/posts', [BackendController::class, 'posts']);
+        Route::get('/admin/users', [BackendController::class, 'users']);
         Route::resource('/admin/categories', CategoriesController::class)->except('show');
         Route::resource('/admin/posts', BackendController::class)->except('index');
     });
 
-
-
 // Session Routes
-    Route::post('/sessions', [SessionsController::class, 'store'])  ->middleware('guest');
-    Route::get('/login', [SessionsController::class, 'create'])     ->middleware('guest');
+    Route::middleware(['guest'])->group(function () {
+        Route::post('/sessions', [SessionsController::class, 'store']);
+        Route::get('/login', [SessionsController::class, 'create']);
+        Route::get('/register',[RegisterController::class, 'create']);
+        Route::post('/register',[RegisterController::class, 'store']);
+    });
     Route::post('/logout', [SessionsController::class, 'destroy'])  ->middleware('auth');
 
-    Route::get('/register',[RegisterController::class, 'create'])   ->middleware('guest');
-    Route::post('/register',[RegisterController::class, 'store'])   ->middleware('guest');
 
 // Newsletter routes
     Route::post('/newsletter', NewsletterController::class);
